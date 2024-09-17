@@ -1,18 +1,47 @@
 body {
     background: linear-gradient(90deg, rgba(0,212,255,1) 22%, rgba(9,9,121,1) 66%, rgba(2,0,36,1) 100%);
-}
-h1 {
-    font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
+    margin: 0px;
+    height: 100%;
+}
+main {
+    margin: 50px 15px 100px;
+    padding: 2px;
+}
+
+h1 {
+    font-weight: bold;
     text-transform: uppercase;
 }
 div {
     text-align: center;
+}
+p, ol {
+    text-align: justify;
 }
 img {
     width: 40%;
     height: auto;
     border-radius: 20px;
     border: 10px solid white;
+    background-color: white;
+}
+header {
+    background-color: rgb(35, 35, 35);
+    color: rgb(253, 253, 253);
+    padding: 8px;
+    position: fixed;
+	top: 0;
+    right: 0;
+    left: 0;
+}
+footer {
+    background-color: rgb(35, 35, 35);
+    color: rgb(253, 253, 253);
+    padding: 6.6px;
+    position: fixed;
+	bottom: 0;
+    right: 0;
+    left: 0;
 }
