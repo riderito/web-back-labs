@@ -331,3 +331,33 @@ def lab2():
 def filters():
     phrase = "О <b>сколько</b> <u>нам</u> <i>открытий</i> чудных..."
     return render_template('filter.html', phrase = phrase)
+
+@app.route('/lab2/calc/<int:a>/<int:b>')
+def calc(a, b):
+    sum = a + b
+    razn = a - b
+    umn = a * b
+    dele = a / b if b != 0 else 'деление на 0'
+    step = a ** b
+    return f'''
+<!doctype html>
+<html>
+    <body>
+        <h1>Расчёт с параметрами:</h1>
+        <p>Сумма: {a} + {b} = {sum}</p>
+        <p>Разность: {a} - {b} = {razn}</p>
+        <p>Умножение: {a} X {b} = {umn}</p>
+        <p>Деление: {a} / {b} = {dele}</p>
+        <p>Возведение в степень: {a}<sup>{b}</sup> = {step}</p>
+    </body>
+</html>
+'''
+
+# Функция Flask redirect перенаправляет пользователя на другой маршрут
+@app.route('/lab2/calc/')
+def calc_default():
+    return redirect('/lab2/calc/1/1')
+
+@app.route('/lab2/calc/<int:a>')
+def calc_redirect(a):
+    return redirect(url_for('calc', a=a, b=1))
