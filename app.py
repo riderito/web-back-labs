@@ -361,3 +361,20 @@ def calc_default():
 @app.route('/lab2/calc/<int:a>')
 def calc_redirect(a):
     return redirect(url_for('calc', a=a, b=1))
+
+books = [
+    {"author": "Рэй Брэдбери", "title": "451 градус по Фаренгейту", "genre": "Роман", "pages": 288},
+    {"author": "Александр Пушкин", "title": "Евгений Онегин", "genre": "Роман в стихах", "pages": 352},
+    {"author": "Лев Толстой", "title": "Война и мир", "genre": "Роман", "pages": 1274},
+    {"author": "Фёдор Достоевский", "title": "Преступление и наказание", "genre": "Роман", "pages": 640},
+    {"author": "Михаил Булгаков", "title": "Мастер и Маргарита", "genre": "Фантастика", "pages": 528},
+    {"author": "Маргарет Митчелл", "title": "Унесённые ветром", "genre": "Роман", "pages": 1472},
+    {"author": "Антон Чехов", "title": "Вишнёвый сад", "genre": "Пьеса", "pages": 128},
+    {"author": "Иван Тургенев", "title": "Отцы и дети", "genre": "Роман", "pages": 432},
+    {"author": "Николай Гоголь", "title": "Мёртвые души", "genre": "Сатира", "pages": 425},
+    {"author": "Максим Горький", "title": "Мать", "genre": "Роман", "pages": 370}
+]
+
+@app.route('/lab2/books/')
+def book_list():
+    return render_template('books.html', books=books)
