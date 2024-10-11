@@ -1,13 +1,32 @@
 <!doctype html>
 <html>
+    <head>
+        <title>Список цветов</title>
+    </head>
+    <style>
+        input {
+            margin: 5px 0;
+        }
+    </style>
     <body>
         <h1>Список всех цветов</h1>
         <p>Всего цветов: {{ flower_count }}</p>
-        <p>Полный список:</p>
         <ul>
-            {% for f in flower_list %}
-            <li>{{ loop.index }} - {{ f }}</li>
-            {% endfor %}
+        {% for flower in flower_list %}
+            <li>{{ loop.index }}. {{ flower.name }} - {{ flower.price }} руб 
+            <a href="{{ url_for('del_flower', flower_id=loop.index0) }}">удалить</a></li>
+        {% endfor %}
         </ul>
+
+        <a href="{{ url_for('clear_flowers') }}">Удалить все цветы</a>
+
+        <h2>Добавить цветок</h2>
+        <form action="{{ url_for('add_flower') }}" method="GET">
+            <label for="name">Добавить цветок:</label>
+            <input type="text" name="name" id="name" required><br>
+            <label for="price">Цена:</label>
+            <input type="number" name="price" id="price" required>
+            <button type="submit">Добавить</button>
+        </form>
     </body>
 </html>
