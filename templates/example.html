@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Алексей Степук. Лабораторная работа {{ number_lab }}</title>
+    <title>{% if name %} {{ name }}.{% else %}Анонимус.{% endif %} {% if number_lab %}Лабораторная работа {{ number_lab }}{% else %}Неизвестная лабораторная{% endif %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
     <header>
-        WEB-программирование, часть 2. Лабораторная работа {{ number_lab }}
+        WEB-программирование, часть 2. {% if number_lab %}Лабораторная работа {{ number_lab }}{% else %}Неизвестная лабораторная{% endif %}
     </header>
 
     <main>
@@ -20,7 +20,25 @@
     </main>
 
     <footer>
-        &copy; {{ name }}, {{ group_student }}, {{ number_course }} курс, 2024
+        &copy;
+        {% if name %}
+            {{ name }},
+        {% else %}
+            Анонимус,
+        {% endif %}
+
+        {% if group_student %}
+            {{ group_student }},
+        {% else %}
+            ААА-00 (не задана),
+        {% endif %}
+
+        {% if number_course %}
+            {{ number_course }} курс,
+        {% else %}
+            курс не задан,
+        {% endif %}
+        2024
     </footer>
 </body>
 </html>
