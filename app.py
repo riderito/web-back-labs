@@ -269,9 +269,14 @@ def add_flower(name):
 
 @app.route('/lab2/example')
 def example():
-    name = 'Алексей Степук'
-    number_lab = 2
-    group_student = 'ФБИ-24'
-    number_course = 3
+    name, number_lab, group_student, number_course = 'Алексей Степук', 2, 'ФБИ-24', 3
+    fruits = [
+        {'name': 'яблоки', 'price': 101},
+        {'name': 'груши', 'price': 121},
+        {'name': 'апельсины', 'price': 81},
+        {'name': 'мандарины', 'price': 96},
+        {'name': 'манго', 'price': 322}
+    ]
     return render_template('example.html', name=name, number_lab=number_lab,
-                           group_student=group_student, number_course=number_course)
+                           group_student=group_student, number_course=number_course,
+                           fruits=fruits)
