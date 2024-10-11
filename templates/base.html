@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей Степук. {% block lab %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <header>
+        WEB-программирование, часть 2. {{ self.lab() }}
+    </header>
+
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    
+    <footer>
+        &copy; Алексей Степук, ФБИ-24, 3 курс, 2024
+    </footer>
+</body>
+</html>
