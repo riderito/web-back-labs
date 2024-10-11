@@ -25,6 +25,9 @@ def menu():
                     <li>
                         <a href="/lab1">Первая лабораторная</a>
                     </li>
+                    <li>
+                        <a href="/lab2">Вторая лабораторная</a>
+                    </li>
                 </ol>
             </div>
         </main>
@@ -327,7 +330,7 @@ def example():
 def lab2():
     return render_template('lab2.html')
 
-@app.route('/lab2/filters')
+@app.route('/lab2/filters/')
 def filters():
     phrase = "О <b>сколько</b> <u>нам</u> <i>открытий</i> чудных..."
     return render_template('filter.html', phrase = phrase)
