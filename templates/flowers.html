@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+    <body>
+        <h1>Список всех цветов</h1>
+        <p>Всего цветов: {{ flower_count }}</p>
+        <p>Полный список:</p>
+        <ul>
+            {% for f in flower_list %}
+            <li>{{ loop.index }} - {{ f }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
