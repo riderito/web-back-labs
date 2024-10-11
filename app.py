@@ -378,3 +378,15 @@ books = [
 @app.route('/lab2/books/')
 def book_list():
     return render_template('books.html', books=books)
+
+movies = [
+    {"title": "Назад в будущее", "description": "Фантастическое приключение о путешествиях во времени.", "image": "back_to_the_future.jpg"},
+    {"title": "Крёстный отец", "description": "Эпическая криминальная сага о мафиозной семье Корлеоне.", "image": "godfather.jpg"},
+    {"title": "Матрица", "description": "Фантастический боевик о мире, где реальность — это иллюзия.", "image": "matrix.jpg"},
+    {"title": "Бойцовский клуб", "description": "Первое правило Бойцовского клуба — никому не рассказывать о Бойцовском клубе!", "image": "fight_club.jpg"},
+    {"title": "Интерстеллар", "description": "Научно-фантастический фильм о путешествиях в дальний космос.", "image": "interstellar.jpg"}
+]
+
+@app.route('/lab2/movies/')
+def movie_list():
+    return render_template('movies.html', movies=movies)
