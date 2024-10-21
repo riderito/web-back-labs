@@ -6,7 +6,7 @@
 {# основной контент: #}
 {% block main %}
 
-    {% if user %}
+    {% if user and age %}
 
     <h1>Привет, {{ user }}!</h1>
     <h2>Добро пожаловать на наш сайт!</h2>
@@ -24,19 +24,21 @@
     <form>
         <label>Ваше имя:</label>
         <div>
-            <input type="text" placeholder="как вас зовут?" name="user">
+            <input type="text" placeholder="как вас зовут?" name="user" value="{{ user or '' }}">
+            <span class="error">{{ errors.user }}</span>
         </div>
 
         <label>Ваш возраст:</label>
         <div>
-            <input type="number" name="age">
+            <input type="number" name="age" value="{{ age or '' }}">
+            <span class="error">{{ errors.age }}</span>
         </div>
 
         <label>Ваш пол:</label>
         <div>
             <select name="sex">
-                <option value="male">мужчина</option>
-                <option value="female">женщина</option>
+                <option value="male" {{ sex == 'male' and selected }}>мужчина</option>
+                <option value="female" {{ sex == 'female' and selected }}>женщина</option>
             </select>
         </div>
 
