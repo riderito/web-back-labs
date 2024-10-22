@@ -98,6 +98,18 @@ def settings():
     return resp
 
 
+@lab3.route('/lab3/clear_cookies')
+def clear_cookies():
+    # Создаем ответ с перенаправлением на страницу третьей лабы
+    resp = make_response(redirect('/lab3/'))
+    # Удаляем каждую куку, установленную в /lab3/settings
+    resp.delete_cookie('color')
+    resp.delete_cookie('background_color')
+    resp.delete_cookie('font_size')
+    resp.delete_cookie('text_align')
+    return resp
+
+
 @lab3.route('/lab3/ticket-form')
 def ticket_form():
     return render_template('lab3/ticket_form.html')
