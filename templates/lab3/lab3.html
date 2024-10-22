@@ -7,8 +7,9 @@
 {% block main %}
     <h1>Формы, cookie</h1>
     <div>
-        Привет, <span style="color: {{name_color}}">{{ name }}</span>!
+        Привет, <span style="color: {{name_color}}">{{ name or 'ноунейм' }}</span>!
     </div>
+    <div>Тебе уже столько годиков: {{ age or 'секрет' }}</div><br>
     <div>Список сделанных страниц:</div>
     <ol>
         <li><a href="/lab3/cookie">Куки</a></li>
