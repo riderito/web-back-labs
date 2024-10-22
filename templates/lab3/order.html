@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1>Заказ напитка</h1>
+
+    <form action="/lab3/pay">
+        <div class="text_div">Напиток:</div>
+        <div class="area">
+            <label>
+                <input type="radio" value="coffee" name="drink" checked>кофе - 120 рублей<br>
+            </label>
+            <label>
+                <input type="radio" value="black-tea" name="drink">черный чай - 80 рублей<br>
+            </label>
+            <label>
+                <input type="radio" value="green-tea" name="drink">зеленый чай - 70 рублей<br>
+            </label>
+        </div>
+
+        <div class="text_div">Добавки:</div>
+        <div class="area">
+            <label>
+                <input type="checkbox" name="milk">молоко - 30 рублей<br>
+            </label>
+            <label>
+                <input type="checkbox" name="sugar">сахар - 10 рублей
+            </label>
+        </div>
+
+        <div>
+            <button type="submit">Заказать</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block style %}
+<style>
+    input {
+        margin: 8px 0;
+        cursor: pointer;
+    }
+    label {
+        font-size: larger;
+        font-family: Helvetica, sans-serif;
+        color: white;
+        font-weight: bold;
+        text-shadow:
+            0 0 3px #fff,
+            0 0 5px rgb(235, 171, 104),
+            0 0 7px rgb(234, 172, 118),
+            0 0 6px rgb(250, 152, 24);
+        cursor: pointer;
+    }
+    .area {
+        background-color: rgb(250, 152, 24);
+        padding: 20px;
+        text-align: center;
+        max-width: 30%;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
+    button, .text_div {
+        background-color: black;
+        font-weight: bold;
+        color: white;
+        border-radius: 15px;
+        padding: 10px;
+        cursor: pointer;
+        font-size: large;
+        width: 13%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
