@@ -24,13 +24,13 @@ flower_list = [
 @lab2.route('/lab2/flowers/')
 def list_flowers():
     flower_count = len(flower_list)
-    return render_template('flowers.html', flower_list=flower_list, flower_count=flower_count)
+    return render_template('lab2/flowers.html', flower_list=flower_list, flower_count=flower_count)
 
 
 @lab2.route('/lab2/del_flower/<int:flower_id>')
 def del_flower(flower_id):
     if flower_id >= len(flower_list):
-        return render_template('404.html', message="Цветка с таким номером нет"), 404
+        return render_template('lab2/404.html', message="Цветка с таким номером нет"), 404
     else:
         flower_list.pop(flower_id)
         return redirect(url_for('list_flowers'))
@@ -39,7 +39,7 @@ def del_flower(flower_id):
 @lab2.route('/lab2/clear_flowers/')
 def clear_flowers():
     flower_list.clear()  # Очищаем список
-    return render_template('flowers.html', flower_list=flower_list, flower_count=len(flower_list))
+    return render_template('lab2/flowers.html', flower_list=flower_list, flower_count=len(flower_list))
 
 
 @lab2.route('/lab2/add_flower/')
@@ -48,7 +48,7 @@ def add_flower():
     price = request.args.get('price')
     if name and price:
         flower_list.append({"name": name, "price": price})
-        return render_template('flowers.html', flower_list=flower_list, flower_count=len(flower_list))
+        return render_template('lab2/flowers.html', flower_list=flower_list, flower_count=len(flower_list))
     return 'Вы не задали имя цветка или его цену', 400
 
 
@@ -62,20 +62,20 @@ def example():
         {'name': 'мандарины', 'price': 96},
         {'name': 'манго', 'price': 322}
     ]
-    return render_template('example.html', name=name, number_lab=number_lab,
+    return render_template('lab2/example.html', name=name, number_lab=number_lab,
                            group_student=group_student, number_course=number_course,
                            fruits=fruits)
 
 
 @lab2.route('/lab2/')
 def lab():
-    return render_template('lab2.html')
+    return render_template('lab2/lab2.html')
 
 
 @lab2.route('/lab2/filters/')
 def filters():
     phrase = "О <b>сколько</b> <u>нам</u> <i>открытий</i> чудных..."
-    return render_template('filter.html', phrase = phrase)
+    return render_template('lab2/filter.html', phrase = phrase)
 
 
 @lab2.route('/lab2/calc/<int:a>/<int:b>')
@@ -127,18 +127,18 @@ books = [
 
 @lab2.route('/lab2/books/')
 def book_list():
-    return render_template('books.html', books=books)
+    return render_template('lab2/books.html', books=books)
 
 
 movies = [
-    {"title": "Назад в будущее", "description": "Фантастическое приключение о путешествиях во времени.", "image": "back_to_the_future.jpg"},
-    {"title": "Крёстный отец", "description": "Эпическая криминальная сага о мафиозной семье Корлеоне.", "image": "godfather.jpg"},
-    {"title": "Матрица", "description": "Фантастический боевик о мире, где реальность — это иллюзия.", "image": "matrix.jpg"},
-    {"title": "Бойцовский клуб", "description": "Первое правило Бойцовского клуба — никому не рассказывать о Бойцовском клубе!", "image": "fight_club.jpg"},
-    {"title": "Интерстеллар", "description": "Научно-фантастический фильм о путешествиях в дальний космос.", "image": "interstellar.jpg"}
+    {"title": "Назад в будущее", "description": "Фантастическое приключение о путешествиях во времени.", "image": "lab2/back_to_the_future.jpg"},
+    {"title": "Крёстный отец", "description": "Эпическая криминальная сага о мафиозной семье Корлеоне.", "image": "lab2/godfather.jpg"},
+    {"title": "Матрица", "description": "Фантастический боевик о мире, где реальность — это иллюзия.", "image": "lab2/matrix.jpg"},
+    {"title": "Бойцовский клуб", "description": "Первое правило Бойцовского клуба — никому не рассказывать о Бойцовском клубе!", "image": "lab2/fight_club.jpg"},
+    {"title": "Интерстеллар", "description": "Научно-фантастический фильм о путешествиях в дальний космос.", "image": "lab2/interstellar.jpg"}
 ]
 
 
 @lab2.route('/lab2/movies/')
 def movie_list():
-    return render_template('movies.html', movies=movies)
+    return render_template('lab2/movies.html', movies=movies)
