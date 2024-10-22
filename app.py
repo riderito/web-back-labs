@@ -31,6 +31,9 @@ def menu():
 <html>
     <head>
         <title>НГТУ, ФБ, Лабораторные работы</title>
+        <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="static/favicon-16x16.png">
+        <link rel="icon" href="static/favicon-32x32.png">
     </head>
     <body>
         <header>
