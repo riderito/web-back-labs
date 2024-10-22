@@ -146,3 +146,45 @@ def ticket_result():
                            destination=destination, date=date, berth=berth,
                            bedding=bedding, luggage=luggage, insurance=insurance,
                            ticket_type=ticket_type, price=price)
+
+
+# Список товаров (фильмов)
+movies = [
+    {'title': 'Начало', 'price': 306, 'genre': 'Научная фантастика', 'year': 2010},
+    {'title': 'Интерстеллар', 'price': 604, 'genre': 'Научная фантастика', 'year': 2014},
+    {'title': 'Тёмный рыцарь', 'price': 400, 'genre': 'Боевик', 'year': 2008},
+    {'title': 'Бойцовский клуб', 'price': 307, 'genre': 'Драма', 'year': 1999},
+    {'title': 'Матрица', 'price': 450, 'genre': 'Научная фантастика', 'year': 1999},
+    {'title': 'Криминальное чтиво', 'price': 350, 'genre': 'Криминал', 'year': 1994},
+    {'title': 'Крёстный отец', 'price': 530, 'genre': 'Криминал', 'year': 1972},
+    {'title': 'Побег из Шоушенка', 'price': 551, 'genre': 'Драма', 'year': 1994},
+    {'title': 'Гладиатор', 'price': 640, 'genre': 'Боевик', 'year': 2000},
+    {'title': 'Мстители', 'price': 700, 'genre': 'Боевик', 'year': 2012},
+    {'title': 'Джокер', 'price': 420, 'genre': 'Драма', 'year': 2019},
+    {'title': 'Титаник', 'price': 300, 'genre': 'Романтика', 'year': 1997},
+    {'title': 'Аватар', 'price': 750, 'genre': 'Научная фантастика', 'year': 2009},
+    {'title': 'Храброе сердце', 'price': 520, 'genre': 'Исторический', 'year': 1995},
+    {'title': 'Король Лев', 'price': 401, 'genre': 'Мультфильм', 'year': 1994},
+    {'title': 'Звёздные войны', 'price': 660, 'genre': 'Научная фантастика', 'year': 1977},
+    {'title': 'Форрест Гамп', 'price': 370, 'genre': 'Драма', 'year': 1994},
+    {'title': 'Властелин колец', 'price': 708, 'genre': 'Фантастика', 'year': 2001},
+    {'title': 'Гарри Поттер и философский камень', 'price': 650, 'genre': 'Фантастика', 'year': 2001},
+    {'title': 'Пираты Карибского моря: Проклятие Чёрной жемчужины', 'price': 550, 'genre': 'Приключения', 'year': 2003}
+]
+
+
+@lab3.route('/lab3/search')
+def search():
+    return render_template('lab3/search.html')
+
+
+@lab3.route('/lab3/search-results')
+def search_results():
+    # Получаем минимальную и максимальную цену из параметров запроса
+    min_price = request.args.get('min_price', type=int)
+    max_price = request.args.get('max_price', type=int)
+
+    # Фильтруем по диапазону цен
+    filtered_movies = [movie for movie in movies if min_price <= movie['price'] <= max_price]
+
+    return render_template('lab3/search_results.html', movies=filtered_movies, min_price=min_price, max_price=max_price)
