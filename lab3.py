@@ -96,3 +96,41 @@ def settings():
     resp = make_response(render_template('lab3/settings.html', color=color, background_color=background_color,
                                          font_size=font_size, text_align=text_align))
     return resp
+
+
+@lab3.route('/lab3/ticket-form')
+def ticket_form():
+    return render_template('lab3/ticket_form.html')
+
+
+@lab3.route('/lab3/ticket-result', methods=['POST'])
+def ticket_result():
+    fio = request.form.get('fio')
+    age = int(request.form.get('age'))
+    departure = request.form.get('departure')
+    destination = request.form.get('destination')
+    date = request.form.get('date')
+    berth = request.form.get('berth')
+    bedding = 'bedding' in request.form
+    luggage = 'luggage' in request.form
+    insurance = 'insurance' in request.form
+    # Расчет стоимости
+    price = 700 if age < 18 else 1000  # Детский или взрослый билет
+    # Добавка за нижнюю или нижнюю боковую полку
+    if berth == 'lower' or berth == 'side_lower':
+        price += 100
+    # Добавка за белье
+    if bedding:
+        price += 75
+    # Добавка за багаж
+    if luggage:
+        price += 250
+    # Добавка за страховку
+    if insurance:
+        price += 150
+    # Определяем тип билета
+    ticket_type = "Детский билет" if age < 18 else "Взрослый билет"
+    return render_template('lab3/ticket_result.html', fio=fio, age=age, departure=departure,
+                           destination=destination, date=date, berth=berth,
+                           bedding=bedding, luggage=luggage, insurance=insurance,
+                           ticket_type=ticket_type, price=price)

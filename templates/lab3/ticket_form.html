@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1>Железнодорожный билет</h1>
+    <form action="{{ url_for('lab3.ticket_result') }}" method="POST">
+        <label for="fio">ФИО:</label><br>
+        <input type="text" id="fio" name="fio" required><br><br>
+
+        <label for="age">Возраст:</label><br>
+        <input type="number" id="age" name="age" min="1" max="120" required><br><br>
+
+        <label for="departure">Пункт выезда:</label><br>
+        <input type="text" id="departure" name="departure" required><br><br>
+
+        <label for="destination">Пункт назначения:</label><br>
+        <input type="text" id="destination" name="destination" required><br><br>
+
+        <label for="date">Дата поездки:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label>Полка:</label><br>
+        <select name="berth" required>
+            <option value="lower">Нижняя</option>
+            <option value="upper">Верхняя</option>
+            <option value="side_upper">Верхняя боковая</option>
+            <option value="side_lower">Нижняя боковая</option>
+        </select><br><br>
+
+        <label><input type="checkbox" name="bedding"> С бельём</label><br><br>
+        <label><input type="checkbox" name="luggage"> С багажом</label><br><br>
+        <label><input type="checkbox" name="insurance"> Нужна страховка</label><br><br>
+
+        <button type="submit">Рассчитать билет</button>
+    </form>
+{% endblock %} 
