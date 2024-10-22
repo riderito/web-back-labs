@@ -9,6 +9,25 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ url_for('static', filename='favicon-16x16.png') }}">
     <link rel="icon" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <style>
+        body {
+            {% if request.cookies.get('color') %}
+            color: {{ request.cookies.get('color') }};
+            {% endif %}
+
+            {% if request.cookies.get('background_color') %}
+            background-color: {{ request.cookies.get('background_color') }};
+            {% endif %}
+
+            {% if request.cookies.get('font_size') %}
+            font-size: {{ request.cookies.get('font_size') }}px;
+            {% endif %}
+
+            {% if request.cookies.get('text_align') %}
+            text-align: {{ request.cookies.get('text_align') }};
+            {% endif %}
+        }
+    </style>
 </head>
 <body>
     <header>
