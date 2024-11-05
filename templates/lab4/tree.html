@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block lab %}Нравится / не нравится{% endblock %}
+
+{% block main %}
+    <div>
+        Посажено деревьев: {{ tree_count }}
+    </div>
+    <form method="post">
+        <button name="operation" value="plant">Посадить дерево</button>
+        <button name="operation" value="cut">Срубить дерево</button>
+    </form>
+{% endblock %}
