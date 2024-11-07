@@ -5,6 +5,7 @@
 {% block main %}
     {% if authorized %}
         <h1>Добро пожаловать, {{ name }}!</h1>
+        <div style="margin: 10px 0;"><a href="/lab4/users">Список всех пользователей</a></div>
         <div>
             <form action="/lab4/logout" method="post">
                 <button>Выход</button>
@@ -30,5 +31,6 @@
                 <button type="reset">Отмена</button>
             </div>
         </form>
+        <a href="/lab4/register"><button>Зарегистрироваться</button><br>
     {% endif %}
 {% endblock %}

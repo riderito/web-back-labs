@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h1>Регистрация</h1>
+    <form method="post">
+        <div>
+            <label for="login">Логин:</label>
+            <input type="text" id="login" name="login" required>
+        </div>
+        <div>
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="gender">Пол:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+            </select>
+        </div>
+        <div style="color: red; font-style: italic; font-weight: bold;">
+            {{ error }}
+        </div>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+{% endblock %}
