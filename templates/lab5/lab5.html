@@ -11,7 +11,7 @@
         <a href="/lab5/register"><button>Регистрация</button></a>
         <a href="/lab5/list"><button>Cписок статей</button></a>
         <a href="/lab5/create"><button>Cоздать статью</button></a>
-        <div><i>Anonymous</i></div>
+        <div><i>{{ login if login else 'Anonymous' }}</i></div>
     </div>
 {% endblock %}
 
