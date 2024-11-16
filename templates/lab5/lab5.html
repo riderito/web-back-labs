@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %}Лабораторная работа 5{% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1>База знаний</h1>
+    <div class="ka-block">
+        <a href="/lab5/login"><button>Вход</button></a>
+        <a href="/lab5/register"><button>Регистрация</button></a>
+        <a href="/lab5/list"><button>Cписок статей</button></a>
+        <a href="/lab5/create"><button>Cоздать статью</button></a>
+        <div><i>Anonymous</i></div>
+    </div>
+{% endblock %}
+
+{% block style %}
+<style>
+.ka-block {
+    width: 90%;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 15px auto;
+    border: 5px solid;
+    border-radius: 20px;
+    background: linear-gradient(rgb(255, 170, 0), pink);
+    color: white;
+    font-weight: bold;
+}
+button {
+    border: 5px solid white;
+    padding: 15px;
+    color: white;
+    width: 160px;
+    background-color: orange;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.5s;
+}
+button:hover {
+    border-radius: 10px;
+}
+</style>
+{% endblock %}
