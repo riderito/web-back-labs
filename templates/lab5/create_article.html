@@ -16,8 +16,20 @@
             <textarea name="article_text"></textarea>
         </div>
 
+        {% if error %}
+        <div style="color: red; font-style: italic; font-weight: bold; margin-bottom: 10px;">
+            {{ error }}
+        </div>
+        {% endif %}
+
         <div>
             <button type="submit">Готово</button>
         </div>
     </form>
+
+    <p><a href="/lab5/logout" style="border: 5px solid white; padding: 3px"><i>Выйти</i></a></p>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
 {% endblock %}

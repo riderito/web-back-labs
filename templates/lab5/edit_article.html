@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 5{% endblock %}
+
+{% block main %}
+    <h1>Редактирование статьи</h1>
+    <form method="POST">
+        <div>
+            <label for="title">
+                Заголовок:
+                <input type="text" id="title" name="title" value="{{ article['title'] }}" required>
+            </label>
+        </div>
+
+        <div>
+            <label for="content" class="for_edit">
+                Содержание:
+                <textarea style="resize: none;" id="content" name="content" rows="5"
+                cols="40" required>{{ article['article_text'] }}</textarea>
+            </label>
+        </div>
+
+        <button type="submit">Сохранить</button>
+        <a href="/lab5/list"><button>Отмена</button></a>
+    </form>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
+{% endblock %}

@@ -1,0 +1,59 @@
+.ka-block {
+    width: 90%;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 15px auto;
+    border: 5px solid;
+    border-radius: 20px;
+    background: linear-gradient(rgb(255, 170, 0), pink);
+}
+button {
+    border: 5px solid white;
+    padding: 15px;
+    color: white;
+    width: 180px;
+    background-color: orange;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.5s;
+}
+button:hover {
+    border-radius: 10px;
+}
+h1, h2, label, div, a, p, blockquote {
+    color: white;
+    margin: 35px 0;
+    font-weight: bold;
+}
+body {
+    background: linear-gradient(rgb(255, 170, 0), pink);
+    min-height: 100vh;
+}
+a:hover {
+    color: rgb(254, 248, 230);
+    margin-top: 20px;
+    transition: 0.5s;
+}
+a {
+    transition: 1s;
+}
+.ssilka {
+    margin-top: 20px;
+}
+label {
+    border: 6px solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+}
+input, textarea {
+    border-radius: 10px;
+    border: none;
+    padding: 8px;
+}
+.for_edit {
+    padding-top: 90px;
+}

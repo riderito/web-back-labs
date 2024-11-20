@@ -6,9 +6,22 @@
 
     <h1>Статьи</h1>
 
-    {% for article in articles %}
-        <h2>{{ article['title'] }}</h2>
-        <blockquote>{{ article['article_text'] }}</blockquote>
-    {% endfor %}
+    {% if has_articles %}
+        {% for article in articles %}
+            <h2>{{ article['title'] }}</h2>
+            <blockquote>{{ article['article_text'] }}</blockquote>
+            <a href="{{ url_for('lab5.edit_article', article_id=article['id']) }}"><button>Редактировать</button></a>
+            <form method="POST" action="/lab5/delete/{{ article['id'] }}" style="display:inline;">
+                <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить эту статью?')">Удалить</button>
+            </form>
+        {% endfor %}
+    {% else %}
+        <p>У вас пока нет ни одной статьи. <a href="/lab5/create">Создайте первую статью</a>!</p>
+    {% endif %}
 
+    <p><a href="/lab5/logout" style="border: 5px solid white; padding: 3px"><i>Выйти</i></a></p>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
 {% endblock %}

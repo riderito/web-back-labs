@@ -6,4 +6,9 @@
     <h1>Поздравляем, {{ login }}!</h1>
     <p>Вы успешно авторизовались)</p>
     <p><a href="/lab5">Перейти к использованию базы данных</a></p>
+    <p><a href="/lab5/logout" style="border: 5px solid white; padding: 3px"><i>Выйти</i></a></p>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
 {% endblock %}

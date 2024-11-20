@@ -7,3 +7,7 @@
     <p>Вы успешно зарегистрировались)</p>
     <p><a href="/lab5">Перейти к использованию базы данных</a></p>
 {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
+{% endblock %}
