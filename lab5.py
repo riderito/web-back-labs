@@ -152,22 +152,33 @@ def list():
 
     conn, cur = db_connect()
 
+    # Получаем ID текущего пользователя по логину
     if current_app.config['DB_TYPE'] == 'postgres':
-        cur.execute("SELECT id FROM users  WHERE login=%s;", (login, ))
+        cur.execute("SELECT id FROM users WHERE login=%s;", (login,))
     else:
-        cur.execute("SELECT id FROM users  WHERE login=?;", (login, ))
-
+        cur.execute("SELECT id FROM users WHERE login=?;", (login,))
+    
     user_id = cur.fetchone()["id"]
 
+    # Получаем статьи пользователя, сортируя "любимые" в начале
     if current_app.config['DB_TYPE'] == 'postgres':
-        cur.execute("SELECT * FROM articles WHERE user_id=%s;", (user_id, ))
+        cur.execute("""
+        SELECT * FROM articles
+        WHERE user_id=%s
+        ORDER BY is_favorite DESC, id ASC;
+        """, (user_id,))
     else:
-        cur.execute("SELECT * FROM articles WHERE user_id=?;", (user_id, ))
-
+        cur.execute("""
+        SELECT * FROM articles
+        WHERE user_id=?
+        ORDER BY is_favorite DESC, id ASC;
+        """, (user_id,))
+    
     articles = cur.fetchall()
+    has_articles = bool(articles)  # Проверяем, есть ли статьи
 
     db_close(conn, cur)
-    return render_template('/lab5/articles.html', articles=articles, has_articles=bool(articles))
+    return render_template('/lab5/articles.html', articles=articles, has_articles=has_articles)
 
 
 @lab5.route('/lab5/logout')
@@ -267,3 +278,136 @@ def delete_article(article_id):
     conn.commit()
     db_close(conn, cur)
     return redirect('/lab5/list')
+
+
+@lab5.route('/lab5/users', methods=['GET'])
+def list_users():
+    conn, cur = db_connect()
+    
+    # Получаем список всех пользователей
+    cur.execute("SELECT login FROM users;")
+    
+    users = cur.fetchall()  # Получаем все записи
+    
+    db_close(conn, cur)
+    return render_template('lab5/list_users.html', users=users)
+
+
+@lab5.route('/lab5/favorite/<int:article_id>', methods=['POST'])
+def toggle_favorite(article_id):
+    login = session.get('login')
+    if not login:
+        return redirect('/lab5/login')
+
+    conn, cur = db_connect()
+
+    # Получаем ID текущего пользователя
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("SELECT id FROM users WHERE login=%s;", (login,))
+    else:
+        cur.execute("SELECT id FROM users WHERE login=?;", (login,))
+
+    user_id = cur.fetchone()["id"]
+
+    # Проверяем, принадлежит ли статья текущему пользователю
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("SELECT user_id FROM articles WHERE id=%s;", (article_id,))
+    else:
+        cur.execute("SELECT user_id FROM articles WHERE id=?;", (article_id,))
+
+    article = cur.fetchone()
+    if not article or article['user_id'] != user_id:
+        db_close(conn, cur)
+        return "Доступ запрещен", 403
+
+    # Обновляем статус "любимая" на основе чекбокса
+    is_favorite = bool(request.form.get('is_favorite'))
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("""
+        UPDATE articles
+        SET is_favorite=%s
+        WHERE id=%s;
+        """, (is_favorite, article_id))
+    else:
+        cur.execute("""
+        UPDATE articles
+        SET is_favorite=?
+        WHERE id=?;
+        """, (is_favorite, article_id))
+
+    conn.commit()
+    db_close(conn, cur)
+    return redirect('/lab5/list')
+
+
+@lab5.route('/lab5/public/<int:article_id>', methods=['POST'])
+def toggle_public(article_id):
+    login = session.get('login')
+    if not login:
+        return redirect('/lab5/login')
+
+    conn, cur = db_connect()
+
+    # Получаем ID текущего пользователя
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("SELECT id FROM users WHERE login=%s;", (login,))
+    else:
+        cur.execute("SELECT id FROM users WHERE login=?;", (login,))
+
+    user_id = cur.fetchone()["id"]
+
+    # Проверяем, принадлежит ли статья текущему пользователю
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("SELECT user_id FROM articles WHERE id=%s;", (article_id,))
+    else:
+        cur.execute("SELECT user_id FROM articles WHERE id=?;", (article_id,))
+
+    article = cur.fetchone()
+    if not article or article['user_id'] != user_id:
+        db_close(conn, cur)
+        return "Доступ запрещен", 403
+
+    # Обновляем статус "публичная" на основе чекбокса
+    is_public = bool(request.form.get('is_public'))
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("""
+        UPDATE articles
+        SET is_public=%s
+        WHERE id=%s;
+        """, (is_public, article_id))
+    else:
+        cur.execute("""
+        UPDATE articles
+        SET is_public=?
+        WHERE id=?;
+        """, (is_public, article_id))
+
+    conn.commit()
+    db_close(conn, cur)
+    return redirect('/lab5/list')
+
+
+@lab5.route('/lab5/public')
+def public_articles():
+    conn, cur = db_connect()
+
+    # Получаем все публичные статьи
+    if current_app.config['DB_TYPE'] == 'postgres':
+        cur.execute("""
+                    SELECT a.*, u.login
+                    FROM articles AS a
+                        JOIN users AS u
+                            ON u.id = a.user_id
+                    WHERE is_public=True ORDER BY id ASC;""")
+    else:
+        cur.execute("""SELECT a.*, u.login
+                    FROM articles AS a
+                        JOIN users AS u
+                            ON u.id = a.user_id
+                    WHERE is_public=1 ORDER BY id ASC;""")
+    
+    articles = cur.fetchall()
+    has_articles = bool(articles)  # Проверяем, есть ли статьи
+    
+    db_close(conn, cur)
+    return render_template('/lab5/public_articles.html', articles=articles, has_articles=has_articles)

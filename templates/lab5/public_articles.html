@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 5{% endblock %}
+
+{% block main %}
+    <h1>Публичные статьи</h1>
+
+    {% if has_articles %}
+        <ul>
+            {% for article in articles %}
+                <li>
+                    <h2>{{ article['title'] }}</h2>
+                    <blockquote>{{ article['article_text'] }}</blockquote>
+                    <p><i>Автор:</strong> {{ article['login'] }}</i></p>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>На данный момент нет публичных статей.</p>
+    {% endif %}
+    <p><a href="/lab5">Перейти к использованию базы данных</a></p>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
+{% endblock %}

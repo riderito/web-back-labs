@@ -10,6 +10,27 @@
         {% for article in articles %}
             <h2>{{ article['title'] }}</h2>
             <blockquote>{{ article['article_text'] }}</blockquote>
+
+            <div style="display: flex;">
+                <form action="/lab5/favorite/{{ article['id'] }}" method="POST">
+                    <label class="lubimoe">
+                        <input type="checkbox" name="is_favorite" 
+                        onchange="this.form.submit()" 
+                        {% if article['is_favorite'] %}checked{% endif %}>
+                        Любимое
+                    </label>
+                </form>
+
+                <form action="/lab5/public/{{ article['id'] }}" method="POST">
+                    <label class="lubimoe">
+                        <input type="checkbox" name="is_public" 
+                            onchange="this.form.submit()" 
+                            {% if article['is_public'] %}checked{% endif %}>
+                        Публичная
+                    </label>
+                </form>
+            </div>
+
             <a href="{{ url_for('lab5.edit_article', article_id=article['id']) }}"><button>Редактировать</button></a>
             <form method="POST" action="/lab5/delete/{{ article['id'] }}" style="display:inline;">
                 <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить эту статью?')">Удалить</button>
@@ -18,10 +39,19 @@
     {% else %}
         <p>У вас пока нет ни одной статьи. <a href="/lab5/create">Создайте первую статью</a>!</p>
     {% endif %}
-
+    
     <p><a href="/lab5/logout" style="border: 5px solid white; padding: 3px"><i>Выйти</i></a></p>
+    <p><a href="/lab5">Перейти к использованию базы данных</a></p>
 {% endblock %}
 
 {% block style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='lab5/lab5.css') }}">
+
+<style>
+.lubimoe {
+    font-size: 14px;
+    border: 4px solid;
+    margin-right: 10px;
+}
+</style>
 {% endblock %}
