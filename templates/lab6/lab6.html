@@ -27,10 +27,19 @@ function getOfficeList() {
             const li = document.createElement('li');
             li.innerText = `${office.number}: ${office.tenant || 'свободен'}`;
 
-            const bookingButton = document.createElement('button');
-            bookingButton.innerText = 'зарезервировать';
-            bookingButton.onclick = function() {booking(office.number)};
-            li.appendChild(bookingButton);
+            if (!office.tenant) {
+                // Если офис свободен, добавляем кнопку бронирования
+                const bookingButton = document.createElement('button');
+                bookingButton.innerText = 'Зарезервировать';
+                bookingButton.onclick = function() { booking(office.number); };
+                li.appendChild(bookingButton);
+            } else {
+                // Если офис арендован, добавляем кнопку освобождения
+                const cancelButton = document.createElement('button');
+                cancelButton.innerText = 'Освободить';
+                cancelButton.onclick = function() { cancelBooking(office.number); };
+                li.appendChild(cancelButton);
+            }
 
             ul.appendChild(li);
         }
@@ -68,6 +77,45 @@ function booking(officeNumber) {
             }
         }
         else {
+            document.getElementById('office-list').innerHTML = '';
+            getOfficeList();
+        }
+    });
+}
+
+function cancelBooking(officeNumber) {
+    const url = '/lab6/json-rpc-api/';
+    const json = {
+        'jsonrpc': '2.0',
+        'method': 'cancellation',
+        'params': officeNumber,
+        'id': Math.round(Math.random() * 1000)
+    };
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(json)
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        if (data.error) {
+            switch (data.error.code) {
+                case 1:
+                    alert('Вы не авторизованы, пожалуйста, авторизуйтесь');
+                    break;
+                case 3:
+                    alert('Офис не арендован');
+                    break;
+                case 4:
+                    alert('Вы не можете освободить офис, арендованный другим пользователем');
+                    break;
+                case -32601:
+                    alert('Странная ошибка!');
+                    break;
+            }
+        } else {
             document.getElementById('office-list').innerHTML = '';
             getOfficeList();
         }
