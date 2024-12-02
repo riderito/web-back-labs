@@ -56,8 +56,6 @@ def populate_offices():
 
     db_close(conn, cur)
 
-if __name__ == "__main__":
-    populate_offices()
 
 @lab6.route('/lab6/json-rpc-api/', methods = ['POST'])
 def api():

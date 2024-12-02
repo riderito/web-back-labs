@@ -6,11 +6,16 @@ from lab3 import lab3
 from lab4 import lab4
 from lab5 import lab5
 from lab6 import lab6
+from lab6 import populate_offices  # Импортируем функцию заполнения
 
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
 app.config['DB_TYPE'] = os.environ.get('DB_TYPE', 'postgres')
+
+# Вызов функции заполнения в контексте приложения
+with app.app_context():
+    populate_offices()
 
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)
