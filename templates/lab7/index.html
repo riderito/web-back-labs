@@ -3,8 +3,28 @@
 {% block lab %}Лабораторная работа 7{% endblock %}
 
 {% block script %}
+<script src="{{ url_for('static', filename='lab7/main.js') }}"></script>
 {% endblock %}
 
 {% block main %}
+    <h1></h1>
 
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Название</th>
+                <th>Год</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody id="film-list"></tbody>
+    </table>
+
+    <script>
+        fillFilmList();
+    </script>
+
+    <div>
+        <button onclick="addFilm()">Добавить фильм</button>
+    </div>
 {% endblock %}
