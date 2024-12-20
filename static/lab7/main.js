@@ -10,12 +10,20 @@ function fillFilmList() {
             let tr = document.createElement('tr');
 
             let tdTitle = document.createElement('td');
-            let tdTitleRus = document.createElement('td');
+            let tdTitleOrig = document.createElement('td');
             let tdYear = document.createElement('td');
             let tdActions = document.createElement('td');
 
-            tdTitle.innerText = films[i].title == films[i].title_ru ? '' : films[i].title;
-            tdTitleRus.innerText = films[i].title_ru;
+            // Русское название — основное
+            tdTitle.innerText = films[i].title_ru;
+            
+            // Оригинальное название — курсивом и в скобках, если отличается
+            if (films[i].title && films[i].title !== films[i].title_ru) {
+                tdTitleOrig.innerHTML = `<i>(${films[i].title})</i>`;
+            } else {
+                tdTitleOrig.innerText = ''; // Если совпадает, оставляем пустым
+            }
+
             tdYear.innerText = films[i].year;
 
             let editButton = document.createElement('button');
@@ -34,7 +42,7 @@ function fillFilmList() {
             tdActions.append(delButton);
 
             tr.append(tdTitle);
-            tr.append(tdTitleRus);
+            tr.append(tdTitleOrig);
             tr.append(tdYear);
             tr.append(tdActions);
 
@@ -104,6 +112,8 @@ function sendFilm() {
     .then(function(errors) {
         if(errors.description)
             document.getElementById('description-error').innerText = errors.description;
+        if(errors.title_ru)
+            document.getElementById('description-error').innerText = errors.title_ru;
     });
 }
 
