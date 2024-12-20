@@ -17,6 +17,9 @@
     box-shadow: 3px 3px 5px black;
     z-index: 100;
 }
+.error-message {
+    color: red;
+}
 </style>
 {% endblock %}
 
@@ -63,6 +66,7 @@
         <label>
             Описание:
             <textarea id="description"></textarea>
+            <div id="description-error" class="error-message"></div>
         </label><br>
 
         <button onclick="sendFilm()">ОК</button>
