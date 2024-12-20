@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, abort, jsonify
-
+from datetime import datetime
 
 lab7 = Blueprint('lab7', __name__)
 
@@ -102,17 +102,35 @@ def add_film():
     if not film or not isinstance(film, dict):
         abort(400)
 
-    # Проверяем, что описание заполнено
-    if film['description'] == '':
-            return {'description': 'Заполните описание'}, 400
+    # Проверяем оригинальное название
+    if not film.get('title') and not film['title_ru']:
+        return {'error': 'Название на оригинальном языке обязательно, если нет и русского названия'}, 400
     
     # Проверяем, что русское название заполнено
     if not film.get('title_ru'):
-        return {'title_ru': 'Русское название обязательно'}, 400
-
+        return {'error': 'Русское название обязательно'}, 400
+    
     # Если оригинальное название пустое, копируем русское
     if not film.get('title'):
         film['title'] = film['title_ru']
+
+    # Вычисляем текущий год
+    current_year = datetime.now().year
+
+    # Преобразуем год в число, если он передан как строка
+    try:
+        year = int(film.get('year'))
+    except ValueError:
+        return {'error': 'Год должен быть числом'}, 400
+    
+    # Проверяем год выпуска
+    if year < 1895 or year > current_year:
+        return {'error': f'Год должен быть от 1895 до {current_year}'}, 400
+
+    # Проверяем описание
+    if not film.get('description') or len(film['description']) > 2000:
+        return {'error': 'Описание обязательно и не должно превышать 2000 символов'}, 400
+    
 
     films.append(film)
     new_index = len(films) - 1

@@ -110,10 +110,8 @@ function sendFilm() {
         return resp.json();
     })
     .then(function(errors) {
-        if(errors.description)
-            document.getElementById('description-error').innerText = errors.description;
-        if(errors.title_ru)
-            document.getElementById('description-error').innerText = errors.title_ru;
+        if(errors.error)
+            document.getElementById('description-error').innerText = errors.error;
     });
 }
 
