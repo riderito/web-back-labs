@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 8{% endblock %}
+
+{% block main %}
+    <h1>База знаний</h1>
+    <div class="ka-block">
+        <a href="/lab8/login"><button>Вход</button></a>
+        <a href="/lab8/register"><button>Регистрация</button></a>
+        <a href="/lab8/articles"><button>Cписок статей</button></a>
+        <a href="/lab8/create"><button>Создать статью</button></a>
+        <div><i>Anonymous</i></div>
+    </div>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab8/lab8.css') }}">
+{% endblock %}
