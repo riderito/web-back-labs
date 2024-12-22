@@ -1,5 +1,9 @@
 from flask import Flask, redirect
 import os
+from flask_sqlalchemy import SQLAlchemy
+from db import db
+from os import path
+
 from lab1 import lab1
 from lab2 import lab2
 from lab3 import lab3
@@ -14,6 +18,22 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
 app.config['DB_TYPE'] = os.environ.get('DB_TYPE', 'postgres')
+
+if app.config['DB_TYPE'] == 'postgres':
+    db_name = 'alexey_stepuk_orm'
+    db_user = 'alexey_stepuk_orm'
+    db_password = '123'
+    host_ip = '127.0.0.1'
+    host_port = 5432
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = \
+        f'postgresql://{db_user}:{db_password}@{host_ip}:{host_port}/{db_name}'
+else:
+    dir_path = path.dirname(path.realpath(__file__))
+    db_path = path.join(dir_path, "alexey_stepuk_orm.db")
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+
+db.init_app(app)
 
 # Вызов функции заполнения в контексте приложения
 with app.app_context():
