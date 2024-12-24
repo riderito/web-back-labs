@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 8{% endblock %}
+
+{% block main %}
+    <h1>Список моих статей</h1>
+    {% if status_message %}
+        <div style="color: green; font-weight: bold;">
+            {{ status_message }}
+        </div>
+    {% endif %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Текст</th>
+                <th>Публичность</th>
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.title }}</td>
+                <td>{{ article.article_text[:500] }}...</td>
+                <td>{{ 'Публичная' if article.is_public else 'Приватная' }}</td>
+                <td>
+                    <form method="POST" action="/lab8/article">
+                        <input type="hidden" name="article_id" value="{{ article.id }}">
+                            <input type="checkbox" name="is_public" {% if article.is_public %}checked{% endif %}>
+                        <button type="submit">Обновить пулбичность</button>
+                    </form>
+                    <a href="/lab8/article/edit/{{ article.id }}"><button>Редактировать</button></a>
+                    <form method="POST" action="/lab8/article/delete/{{ article.id }}" style="display: inline;">
+                        <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить статью?')">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab8/lab8.css') }}">
+{% endblock %}

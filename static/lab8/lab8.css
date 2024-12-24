@@ -57,3 +57,36 @@ input, textarea {
 .for_edit {
     padding-top: 90px;
 }
+table {
+	width: 100%;
+	margin-bottom: 20px;
+	border: 5px solid #fff;
+	border-top: 5px solid #fff;
+	border-bottom: 3px solid #fff;
+	border-collapse: collapse; 
+	outline: 3px solid #ffb700;
+	font-size: 15px;
+	background: #fff!important;
+    color: black;
+}
+table th {
+	font-weight: bold;
+	padding: 7px;
+	background: #ffb700;
+	border: none;
+	text-align: left;
+	font-size: 15px;
+	border-top: 3px solid #fff;
+	border-bottom: 3px solid #ffb700;
+    color: white;
+}
+table td {
+	padding: 7px;
+	border: none;
+	border-top: 3px solid #fff;
+	border-bottom: 3px solid #fff;
+	font-size: 15px;
+}
+table tbody tr:nth-child(even){
+	background: #f8f8f8!important;
+}

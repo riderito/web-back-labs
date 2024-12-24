@@ -17,6 +17,13 @@
                 Пароль: <input type="password" name="password">
             </label>
         </div>
+
+        <div>
+            <label>
+                <input type="checkbox" name="remember"> Запомнить меня
+            </label>
+        </div>
+
         {% if error %}
         <div  style="color: red; font-style: italic; font-weight: bold;">
             {{ error }}
