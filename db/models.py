@@ -14,3 +14,6 @@ class articles(db.Model):
     is_favorite = db.Column(db.Boolean)
     is_public = db.Column(db.Boolean)
     likes = db.Column(db.Integer)
+
+    # Связь с пользователем
+    user = db.relationship('users', backref=db.backref('articles', lazy=True))

@@ -28,7 +28,7 @@
                     <form method="POST" action="/lab8/article">
                         <input type="hidden" name="article_id" value="{{ article.id }}">
                             <input type="checkbox" name="is_public" {% if article.is_public %}checked{% endif %}>
-                        <button type="submit">Обновить пулбичность</button>
+                        <button type="submit">Обновить публичность</button>
                     </form>
                     <a href="/lab8/article/edit/{{ article.id }}"><button>Редактировать</button></a>
                     <form method="POST" action="/lab8/article/delete/{{ article.id }}" style="display: inline;">

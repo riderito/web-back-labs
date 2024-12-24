@@ -167,3 +167,42 @@ def delete_article(article_id):
     db.session.delete(article)
     db.session.commit()
     return redirect('/lab8/article')
+
+
+@lab8.route('/lab8/public')
+def public_articles():
+    # Получить все публичные статьи
+    public_articles = articles.query.filter_by(is_public=True).all()
+    return render_template('lab8/public_articles.html', articles=public_articles)
+
+
+@lab8.route('/lab8/search', methods=['GET', 'POST'])
+def search_articles():
+    if request.method == 'POST':
+        # Получаем строку поиска из формы
+        search_query = request.form.get('search_query', '').strip()
+
+        # Если строка пуста, перенаправляем на страницу поиска
+        if not search_query:
+            return render_template('lab8/search.html', error='Введите строку для поиска.')
+
+        # Получить результаты поиска среди своих и публичных статей
+        if current_user.is_authenticated:
+            # Ищем свои статьи и публичные статьи других пользователей
+            results = articles.query.filter(
+                (articles.title.ilike(f'%{search_query}%')) |
+                (articles.article_text.ilike(f'%{search_query}%'))
+            ).filter(
+                (articles.user_id == current_user.id) | (articles.is_public == True)
+            ).all()
+        else:
+            # Для неавторизованных пользователей ищем только среди публичных статей
+            results = articles.query.filter(
+                (articles.title.ilike(f'%{search_query}%')) |
+                (articles.article_text.ilike(f'%{search_query}%'))
+            ).filter(articles.is_public == True).all()
+
+        return render_template('lab8/search_results.html', articles=results, query=search_query)
+
+    return render_template('lab8/search.html')
+

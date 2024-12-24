@@ -9,12 +9,14 @@
             <a href="/lab8/login"><button>Вход</button></a>
             <a href="/lab8/register"><button>Регистрация</button></a>
             <a href="/lab8/public"><button>Публичные статьи</button></a>
+            <a href="/lab8/search"><button>Поиск статей</button></a>
             <div><i>Anonymous</i></div>
         {% else %}
             <a href="/lab8/logout"><button>Выход</button></a>
             <a href="/lab8/article"><button>Cписок моих статей</button></a>
             <a href="/lab8/article/create"><button>Cоздать статью</button></a>
             <a href="/lab8/public"><button>Публичные статьи</button></a>
+            <a href="/lab8/search"><button>Поиск статей</button></a>
             <div><i>{{ login }}</i></div>
         {% endif %}
     </div>
