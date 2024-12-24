@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 9{% endblock %}
+
+{% block main %}
+    <h1>Поздравляю тебя, {{ username }}!</h1>
+    <h3>Ты {{ pronoun }}!</h3>
+    <h3>{{ congratulation }}</h3>
+    <img src="/static/images/{{ gift_image }}" alt="Подарок" style="width:450px; height:auto">
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lab9/lab9.css') }}">
+{% endblock %}

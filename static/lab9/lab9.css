@@ -1,0 +1,154 @@
+/* Общий стиль для всего сайта */
+body {
+    background: linear-gradient(to bottom, #00416A, #E4E5E6);
+    font-family: "Comic Sans MS", sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    text-align: center;
+    color: #FFD700; /* Золотой цвет */
+    text-shadow: 2px 2px 5px #FF4500; /* Огненное сияние */
+    margin-top: 20px;
+}
+
+/* Стили для кнопок */
+button {
+    background: #FF6347; /* Томатный цвет */
+    color: #fff;
+    font-size: 18px;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+}
+
+button:hover {
+    background: #FFD700;
+    color: #00416A;
+    transform: scale(1.1);
+}
+
+/* Украшение страницы */
+body::before {
+    content: "";
+    background-image: url('/static/images/snowflakes.png'); /* Фон с снежинками */
+    background-repeat: repeat;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Украшение для блоков */
+div {
+    background: rgba(255, 255, 255, 0.1); /* Прозрачный белый блок */
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    max-width: 800px;
+}
+
+/* Стили для ссылок */
+a {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #FF4500;
+    text-decoration: underline;
+}
+
+/* Изображения */
+img {
+    max-width: auto;
+    height: 340px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    display: block;
+}
+
+
+/* Стили для меток (label) */
+label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700; /* Золотой цвет */
+    text-shadow: 1px 1px 3px #FF4500; /* Легкий огненный эффект */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Стили для полей ввода (input) */
+input[type="text"], input[type="number"] {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    color: #00416A;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: #FF4500;
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.6);
+    transform: scale(1.05);
+}
+
+/* Стили для кнопок отправки формы */
+input[type="submit"], input[type="button"] {
+    background: #FF6347; /* Томатный цвет */
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    margin: 10px auto;
+    display: block;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover {
+    background: #FFD700;
+    color: #00416A;
+    transform: scale(1.1);
+}
+
+/* Обертка для форм */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    max-width: 600px;
+}
