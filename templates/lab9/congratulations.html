@@ -6,7 +6,11 @@
     <h1>Поздравляю тебя, {{ username }}!</h1>
     <h3>Ты {{ pronoun }}!</h3>
     <h3>{{ congratulation }}</h3>
-    <img src="/static/images/{{ gift_image }}" alt="Подарок" style="width:450px; height:auto">
+    <img src="/static/images/{{ gift_image }}" alt="Подарок">
+
+    <form action="{{ url_for('lab9.reset') }}" method="get">
+        <button type="submit">Сбросить данные</button>
+    </form>    
 {% endblock %}
 
 {% block style %}
